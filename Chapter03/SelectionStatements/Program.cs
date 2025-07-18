@@ -51,7 +51,8 @@ WriteLine("After end of switch");
 A_label:
 WriteLine($"After A_label");*/
 
-string path = @"D:\pae\progging\c-\Chapter03";
+//string path = @"D:\pae\progging\c-\Chapter03";
+string path = @"G:\proging\c#\Chapter03";
 Write("Press R for read-only or any other for writable: ");
 ConsoleKeyInfo  key = ReadKey();
 WriteLine();
@@ -69,7 +70,7 @@ else
 
 string message;
 
-switch(s)
+/*switch(s)
 {
     case FileStream writeableFile when s.CanWrite:
         message = "The stream is a file that i can write to.";
@@ -87,5 +88,21 @@ switch(s)
         message = "The stream is null.";
         break;
 }
+
+WriteLine(message);*/
+
+message = s switch
+{
+    FileStream writeableFile when s.CanWrite
+        => "The stream is a file that I can write to.",
+    FileStream readOnlyFile
+    => "The streamis read-only file.",
+    MemoryStream ms
+    => "The stream is a memory address.",
+    null
+    => "The stream is null.",
+    _
+    => "The stream is some other type."
+};
 
 WriteLine(message);
